@@ -45,7 +45,7 @@ def validInteger(string):
         elif not (char in "0123456789"):
             return False
     return True
-##Only allows the user to test for functions 1-3
+##Only allows the user to test for functions 1-7
 def validInput(string):
     if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7"): 
         return True
@@ -97,44 +97,44 @@ def diagMenu():
     print("[ 6 ]  Return to Main Menu")
     print("[ 7 ]  Exit")
     print()
-    userInputD = input("Pick a function to run: ")
-    while not validInput(userInputD):
-        userInputD = input("Please enter a valid input. [ 1-7 ] ")
-    userInputD = int(userInputD)
+    userInput = input("Pick a function to run: ")
+    while not validInput(userInput):
+        userInput = input("Please enter a valid input. [ 1-7 ] ")
+    userInput = int(userInput)
     ##Call Sys Info
-    if userInputD == 1:
+    if userInput == 1:
         print()
         print("#####System Info######")
         sysInfo()
         print()
     ##Call Scheduled Tasks
-    if userInputD == 2:
+    if userInput == 2:
         print()
         print("####Scheduled Tasks######")
         getTasks()
     ##Call Services   
-    if userInputD == 3:
+    if userInput == 3:
         print()
         print("######Enabled/Running Services######")
         getServices()
     ##Call Accounts  
-    if userInputD == 4:
+    if userInput == 4:
         print()
         print("######User Accounts######")
         getAccounts()
     ##Call Active Connections  
-    if userInputD == 5:
+    if userInput == 5:
         print()
         print("######Active Connections######")
         getConnections()
     ##Call Menu   
-    if userInputD == 6:
+    if userInput == 6:
         print()
         print("######We're Going Back Marty######")
         mainFunction()
 
     ##Exit Program
-    if userInputD == 7:
+    if userInput == 7:
           return False
 
            
