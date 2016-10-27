@@ -18,12 +18,12 @@ def sysInfo():
     
     
 ##
-def addPrices():
+def getTasks():
     print('hi')
     
     
 ##
-def addExposure():
+def getServices():
     print('hi')
 
 ##Get About
@@ -31,7 +31,10 @@ def getAbout():
     print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
     mainFunction()
 ##
-def addStock():
+def getAccounts():
+    print('hi')
+
+def getConnections():
     print('hi')
  
 
