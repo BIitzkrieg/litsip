@@ -63,7 +63,7 @@ def repeat():
             print("Exiting...")
             sys.exit()
         elif response in ['y', 'yes']:
-            print("Going to Menu Fam...")
+            print("Going to Menu")
             mainFunction()
         else:
             print("Invalid input.. ")
@@ -77,7 +77,7 @@ def repeatDiag():
             print("Exiting...")
             sys.exit()
         elif response in ['y', 'yes']:
-            print("Going to Menu Fam...")
+            print("Going to Menu")
             diagMenu()
             return daddy 
         else:
@@ -167,8 +167,8 @@ def mainFunction():
     if userInput == 2:
         print()
         print("#####Hardening Menu######")
-        for symbol in names:
-            symbolInfo(symbol)
+        print()
+        hardMenu()
         print()
     ##About   
     if userInput == 3:
@@ -197,5 +197,4 @@ while running == True:
 
 #Call repeat
 #repeat()
-#testcomment
-#zachtest
+
