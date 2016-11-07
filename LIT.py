@@ -11,34 +11,6 @@ import subprocess
 
 
 ##################Functions##################
-##print sys info
-def sysInfo():
-    os.system("lsb_release -a;  df -h")
-    repeatDiag()
-    
-    
-##
-def getTasks():
-    print('hi')
-    
-    
-##
-def getServices():
-    print('hi')
-
-##Get About
-def getAbout():
-    print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
-    mainFunction()
-##
-def getAccounts():
-    print('hi')
-
-def getConnections():
-    print('hi')
- 
-
-
 ## Bool return for a user inputed integer string
 def validInteger(string):
     index = -1
@@ -51,10 +23,72 @@ def validInteger(string):
     return True
 ##Only allows the user to test for functions 1-7
 def validInput(string):
-    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7"): 
+    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7"):
         return True
     else:
         return False
+
+    ##Only allows the user to test for functions 1-4 for Main Menu
+def validInputM(string):
+    if (string == "1" or string == "2" or string == "3" or string == "4"):
+        return True
+    else:
+        return False
+
+##Only allows the user to test for functions 1-2 for getServices
+def validInputS(string):
+    if (string == "1" or string == "2"):
+        return True
+    else:
+        return False
+##print sys info
+def sysInfo():
+    os.system("lsb_release -a;  df -h")
+    repeatDiag()
+    
+    
+##
+def getTasks():
+    os.system("crontab -e")
+    repeatDiag()
+    
+    
+##
+def getServices():
+        print("[ 1 ]  Fedora/CentOS")
+        print("[ 2 ]  Ubuntu/Debian")
+        #print("[ 3 ]  Enabled/Running Services")
+        userInput = input("Choose an OS: ")
+        while not validInputS(userInput):
+            userInput = input("Please enter a valid input. [ 1-2 ] ")
+        userInput = int(userInput)
+        ##Fedora/CentOS service check
+        if userInput == 1:
+            print()
+            os.system("systemctl list-unit-files")
+            repeatDiag()
+        ##Ubuntu/Debian Service Check
+        if userInput == 2:
+            print()
+            os.system("service --status-all")
+            repeatDiag()
+        ##Call Services
+        if userInput == 3:
+            print()
+            print("######Enabled/Running Services######")
+            getServices()
+
+##Get About
+def getAbout():
+    print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
+    mainFunction()
+##
+def getAccounts():
+    print('hi')
+
+def getConnections():
+    print('hi')
+
 ##function to repeat mainFunction
 def repeat():
     while True:
@@ -155,7 +189,7 @@ def mainFunction():
     print("[ 4 ]  Exit")
     print()
     userInput = input("Pick a function to run: ")
-    while not validInput(userInput):
+    while not validInputM(userInput):
         userInput = input("Please enter a valid input. [ 1-4 ] ")
     userInput = int(userInput)
     ##Diagnostic
