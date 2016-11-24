@@ -11,7 +11,7 @@ import subprocess
 
 
 ##################Functions##################
-## Bool return for a user inputed integer string
+## Bool return for a user input integer string
 def validInteger(string):
     index = -1
     for char in string:
@@ -84,10 +84,12 @@ def getAbout():
     mainFunction()
 ##
 def getAccounts():
-    print('hi')
+    os.system("cat /etc/passwd")
+    repeatDiag()
 
 def getConnections():
-    print('hi')
+    os.system("netstat -tulpn")
+    repeatDiag()
 
 ##function to repeat mainFunction
 def repeat():
@@ -202,7 +204,7 @@ def mainFunction():
         print()
         print("#####Hardening Menu######")
         print()
-        hardMenu()
+        #hardMenu()
         print()
     ##About   
     if userInput == 3:
