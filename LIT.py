@@ -41,23 +41,30 @@ def validInputS(string):
         return True
     else:
         return False
+
+##Only allows the user to test for functions 1-8 for hardeningMenu
+def validInputH(string):
+    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7" or string == "8"):
+        return True
+    else:
+        return False
+######################Diagnostic Functions############################################3
 ##print sys info
 def sysInfo():
     os.system("lsb_release -a;  df -h")
     repeatDiag()
     
     
-##
+##getTasks
 def getTasks():
     os.system("crontab -e")
     repeatDiag()
     
     
-##
+##getServices
 def getServices():
         print("[ 1 ]  Fedora/CentOS")
         print("[ 2 ]  Ubuntu/Debian")
-        #print("[ 3 ]  Enabled/Running Services")
         userInput = input("Choose an OS: ")
         while not validInputS(userInput):
             userInput = input("Please enter a valid input. [ 1-2 ] ")
@@ -72,24 +79,49 @@ def getServices():
             print()
             os.system("service --status-all")
             repeatDiag()
-        ##Call Services
-        if userInput == 3:
-            print()
-            print("######Enabled/Running Services######")
-            getServices()
+
 
 ##Get About
 def getAbout():
     print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
     mainFunction()
-##
+##getAccounts
 def getAccounts():
     os.system("cat /etc/passwd")
     repeatDiag()
-
+##getConn
 def getConnections():
     os.system("netstat -tulpn")
     repeatDiag()
+############################Hardening Functions########################################
+def changePass():
+    print("[ 1 ]  Change this accounts password")
+    print("[ 2 ]  Change another account")
+    userInput = input("Choose an option: ")
+    while not validInputS(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    ##Change current acc pass
+    if userInput == 1:
+        print()
+        os.system("passwd")
+        repeatHard()
+    ##change another account
+    if userInput == 2:
+        print()
+        print("Type 'passwd' then the name of the account you would like to change")
+        os.system("")
+        repeatHard()
+## def removeTasks():
+
+#def killServices():
+
+#def removeAcc():
+
+#def killConnections():
+
+#def killProc():
+
 
 ##function to repeat mainFunction
 def repeat():
@@ -116,6 +148,20 @@ def repeatDiag():
             print("Going to Menu")
             diagMenu()
             return daddy 
+        else:
+            print("Invalid input.. ")
+
+def repeatHard():
+    daddy = False
+    while True:
+        response = input("Would you like to return to the Hardening menu? (y/n) ").lower()
+        if response in ['n', 'no']:
+            print("Exiting...")
+            sys.exit()
+        elif response in ['y', 'yes']:
+            print("Going to Menu")
+            hardMenu()
+            return daddy
         else:
             print("Invalid input.. ")
 
@@ -177,6 +223,62 @@ def diagMenu():
     if userInput == 7:
           return False
 
+def hardMenu():
+    print()
+    print("########Hardening Menu########")
+    print()
+    print("[ 1 ]  Change Account Password")
+    print("[ 2 ]  Remove Scheduled Tasks")
+    print("[ 3 ]  Kill/Disable Services")
+    print("[ 4 ]  Remove User Accounts")
+    print("[ 5 ]  Kill Active Connections")
+    print("[ 6 ]  Kill Active Processes")
+    print("[ 7 ]  Return to Main Menu")
+    print("[ 8 ]  Exit")
+    print()
+    userInput = input("Pick a function to run: ")
+    while not validInputH(userInput):
+        userInput = input("Please enter a valid input. [ 1-8 ] ")
+    userInput = int(userInput)
+    ##Call changePass
+    if userInput == 1:
+        print()
+        print("#####Change Account Password######")
+        changePass()
+        print()
+    ##Call removeTasks
+    if userInput == 2:
+        print()
+        print("####Remove Scheduled Tasks######")
+        removeTasks()
+    ##Call killServices
+    if userInput == 3:
+        print()
+        print("######Kill/Disable Services######")
+        killServices()
+    ##Call removeAcc
+    if userInput == 4:
+        print()
+        print("######Remove User Accounts######")
+        removeAcc()
+    ##Call killConnections
+    if userInput == 5:
+        print()
+        print("######Kill Active Connections######")
+        killConnections()
+    ##Call killProc
+    if userInput == 6:
+        print()
+        print("######Kill Active Processes######")
+        killProc()
+
+    if userInput == 7:
+        print()
+        print("#######We're Going Back Marty!######")
+        mainFunction()
+    ##Exit Program
+    if userInput == 8:
+        return False
            
 
 ##################Print Statements/Input/Main##################
@@ -204,7 +306,7 @@ def mainFunction():
         print()
         print("#####Hardening Menu######")
         print()
-        #hardMenu()
+        hardMenu()
         print()
     ##About   
     if userInput == 3:
