@@ -28,22 +28,28 @@ def validInput(string):
     else:
         return False
 
-    ##Only allows the user to test for functions 1-4 for Main Menu
-def validInputM(string):
-    if (string == "1" or string == "2" or string == "3" or string == "4"):
-        return True
-    else:
-        return False
-
 ##Only allows the user to test for functions 1-2 for getServices
-def validInputS(string):
+def validInput2(string):
     if (string == "1" or string == "2"):
         return True
     else:
         return False
 
+def validInput3(string):
+    if (string == "1" or string == "2" or string == "3"):
+        return True
+    else:
+        return False
+
+##Only allows the user to test for functions 1-5 for Main Menu
+def validInput5(string):
+    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5"):
+        return True
+    else:
+        return False
+
 ##Only allows the user to test for functions 1-8 for hardeningMenu
-def validInputH(string):
+def validInput8(string):
     if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7" or string == "8"):
         return True
     else:
@@ -51,7 +57,7 @@ def validInputH(string):
 ######################Diagnostic Functions############################################3
 ##print sys info
 def sysInfo():
-    os.system("lsb_release -a;  df -h")
+    os.system("lsb_release -a; free -m;  df -h; ifconfig")
     repeatDiag()
     
     
@@ -66,7 +72,7 @@ def getServices():
         print("[ 1 ]  Fedora/CentOS")
         print("[ 2 ]  Ubuntu/Debian")
         userInput = input("Choose an OS: ")
-        while not validInputS(userInput):
+        while not validInput2(userInput):
             userInput = input("Please enter a valid input. [ 1-2 ] ")
         userInput = int(userInput)
         ##Fedora/CentOS service check
@@ -98,7 +104,7 @@ def changePass():
     print("[ 1 ]  Change this accounts password")
     print("[ 2 ]  Change another account")
     userInput = input("Choose an option: ")
-    while not validInputS(userInput):
+    while not validInput2(userInput):
         userInput = input("Please enter a valid input. [ 1-2 ] ")
     userInput = int(userInput)
     ##Change current acc pass
@@ -122,8 +128,48 @@ def changePass():
 
 #def killProc():
 
+def getTools():
+    print("[ 1 ]  Install ClamAV")
+    print("[ 2 ]  Install Lynis")
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    ##Change current acc pass
+    if userInput == 1:
+        print()
+        print("[ 1 ]  Fedora")
+        print("[ 2 ]  CentOS")
+        print("[ 3 ]  Ubuntu/Debian")
+        userInput = input("Choose an OS: ")
+        while not validInput3(userInput):
+            userInput = input("Please enter a valid input. [ 1-3 ] ")
+        userInput = int(userInput)
+        if userInput == 1:
+            os.system("dnf install clamav")
+        if userInput == 2:
+            os.system("yum install clamav")
+        if userInput == 3:
+            os.system("apt-get install clamav")
+    ##change another account
+    if userInput == 2:
+        print()
+        print("[ 1 ]  Fedora")
+        print("[ 2 ]  CentOS")
+        print("[ 3 ]  Ubuntu/Debian")
+        userInput = input("Choose an OS: ")
+        while not validInput3(userInput):
+            userInput = input("Please enter a valid input. [ 1-3 ] ")
+        userInput = int(userInput)
+        if userInput == 1:
+            os.system("dnf install lynis")
+        if userInput == 2:
+            os.system("yum install lynis")
+        if userInput == 3:
+            os.system("apt-get install lynis")
 
-##function to repeat mainFunction
+
+    ##function to repeat mainFunction
 def repeat():
     while True:
         response = input("Would you like to return to the main menu? (y/n) ").lower()
@@ -237,7 +283,7 @@ def hardMenu():
     print("[ 8 ]  Exit")
     print()
     userInput = input("Pick a function to run: ")
-    while not validInputH(userInput):
+    while not validInput8(userInput):
         userInput = input("Please enter a valid input. [ 1-8 ] ")
     userInput = int(userInput)
     ##Call changePass
@@ -289,12 +335,13 @@ def mainFunction():
     print()
     print("[ 1 ]  Diagnostic Menu")
     print("[ 2 ]  Hardening Menu")
-    print("[ 3 ]  About")
-    print("[ 4 ]  Exit")
+    print("[ 3 ]  Install Useful Tools")
+    print("[ 4 ]  About")
+    print("[ 5 ]  Exit")
     print()
     userInput = input("Pick a function to run: ")
-    while not validInputM(userInput):
-        userInput = input("Please enter a valid input. [ 1-4 ] ")
+    while not validInput5(userInput):
+        userInput = input("Please enter a valid input. [ 1-5 ] ")
     userInput = int(userInput)
     ##Diagnostic
     if userInput == 1:
@@ -304,19 +351,22 @@ def mainFunction():
     ##Hardening
     if userInput == 2:
         print()
-        print("#####Hardening Menu######")
-        print()
         hardMenu()
         print()
-    ##About   
+    ##Install Tools
     if userInput == 3:
+        print()
+        getTools()
+    ##About   
+    if userInput == 4:
         print()
         print("######About######")
         getAbout()
+
     
 
     ##Exit Program
-    if userInput == 4:
+    if userInput == 5:
           return False
 
     ##Starting run again statement....
