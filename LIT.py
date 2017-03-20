@@ -99,7 +99,7 @@ def getAccounts():
 def getConnections():
     os.system("netstat -tulpn")
     repeatDiag()
-############################Hardening Functions########################################
+############################ Hardening Functions ########################################
 def changePass():
     print("[ 1 ]  Change this accounts password")
     print("[ 2 ]  Change another account")
@@ -219,7 +219,7 @@ def symbolInfo():
 #############Menus#########################    
 def diagMenu():
     print()
-    print("########Diagnostic Menu########")
+    print("######## Diagnostic Menu ########")
     print()
     print("[ 1 ]  System Info")
     print("[ 2 ]  Scheduled Tasks")
@@ -236,33 +236,33 @@ def diagMenu():
     ##Call Sys Info
     if userInput == 1:
         print()
-        print("#####System Info######")
+        print("##### System Info ######")
         sysInfo()
         print()
     ##Call Scheduled Tasks
     if userInput == 2:
         print()
-        print("####Scheduled Tasks######")
+        print("#### Scheduled Tasks ######")
         getTasks()
     ##Call Services   
     if userInput == 3:
         print()
-        print("######Enabled/Running Services######")
+        print("###### Enabled/Running Services ######")
         getServices()
     ##Call Accounts  
     if userInput == 4:
         print()
-        print("######User Accounts######")
+        print("###### User Accounts# #####")
         getAccounts()
     ##Call Active Connections  
     if userInput == 5:
         print()
-        print("######Active Connections######")
+        print("###### Active Connections ######")
         getConnections()
     ##Call Menu   
     if userInput == 6:
         print()
-        print("######We're Going Back Marty######")
+        print("###### We're Going Back Marty ######")
         mainFunction()
 
     ##Exit Program
@@ -271,7 +271,7 @@ def diagMenu():
 
 def hardMenu():
     print()
-    print("########Hardening Menu########")
+    print("######## Hardening Menu ########")
     print()
     print("[ 1 ]  Change Account Password")
     print("[ 2 ]  Remove Scheduled Tasks")
@@ -289,38 +289,38 @@ def hardMenu():
     ##Call changePass
     if userInput == 1:
         print()
-        print("#####Change Account Password######")
+        print("##### Change Account Password ######")
         changePass()
         print()
     ##Call removeTasks
     if userInput == 2:
         print()
-        print("####Remove Scheduled Tasks######")
+        print("#### Remove Scheduled Tasks ######")
         removeTasks()
     ##Call killServices
     if userInput == 3:
         print()
-        print("######Kill/Disable Services######")
+        print("###### Kill/Disable Services ######")
         killServices()
     ##Call removeAcc
     if userInput == 4:
         print()
-        print("######Remove User Accounts######")
+        print("###### Remove User Accounts ######")
         removeAcc()
     ##Call killConnections
     if userInput == 5:
         print()
-        print("######Kill Active Connections######")
+        print("###### Kill Active Connections ######")
         killConnections()
     ##Call killProc
     if userInput == 6:
         print()
-        print("######Kill Active Processes######")
+        print("###### Kill Active Processes ######")
         killProc()
 
     if userInput == 7:
         print()
-        print("#######We're Going Back Marty!######")
+        print("####### We're Going Back Marty! ######")
         mainFunction()
     ##Exit Program
     if userInput == 8:
@@ -331,7 +331,7 @@ def hardMenu():
 ##Main Menu
 def mainFunction():
     print()
-    print("########Main Menu########")
+    print("######## Main Menu ########")
     print()
     print("[ 1 ]  Diagnostic Menu")
     print("[ 2 ]  Hardening Menu")
@@ -360,7 +360,7 @@ def mainFunction():
     ##About   
     if userInput == 4:
         print()
-        print("######About######")
+        print("###### About ######")
         getAbout()
 
     
