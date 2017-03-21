@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 ##Andrew Danis
+##Eric Evans
 ##LIT Protoype
 ##10-26-16
 
@@ -63,10 +64,23 @@ def sysInfo():
     
 ##getTasks
 def getTasks():
-    os.system("crontab -e")
-    repeatDiag()
+    print("\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule. It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:")
+    print('"www.crontab.org"\n')
+    print("[ 1 ]  Edit Crontab")
+    print("[ 2 ]  Return to Diagnostic Menu\n")
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    if userInput == 1:
+        print()
+        os.system("crontab -e")
+        repeatDiag()
+    if userInput == 2:
+        print()
+        repeatDiag()
     
-    
+
 ##getServices
 def getServices():
         print("[ 1 ]  Fedora/CentOS")
