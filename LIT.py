@@ -4,6 +4,7 @@
 ##Eric Evans
 ##LIT Protoype
 ##10-26-16
+##EE
 
 ##################Imports##################
 import sys
@@ -102,7 +103,7 @@ def getServices():
         print("")
         print("If you don't know your OS select option 3 and go back to the Diagnostic Menu. Once there select System Info and figure out your OS.")
         print("")
-        userInput = input("Choose an OS: ")
+        userInput = input("Choose an OS or Return to Menu: ")
         while not validInput3(userInput):
             userInput = input("Please enter a valid input. [ 1-3 ] ")
         userInput = int(userInput)
