@@ -55,12 +55,25 @@ def validInput8(string):
         return True
     else:
         return False
-######################Diagnostic Functions############################################3
+######################Diagnostic Functions############################################
 ##print sys info
 def sysInfo():
-    os.system("lsb_release -a; free -m;  df -h; ifconfig")
+    start = "\033[1m"
+    end = "\033[0;0m"
+    print("")
+    print(start + "Operating System:" + end)
+    os.system("lsb_release -a")
+    print("")
+    print(start + "RAM:" + end)
+    os.system("free -m")
+    print("")
+    print(start + "Partition Info:" + end)
+    os.system("df -h")
+    print("")
+    print(start + "Network Interface Info:" + end)
+    os.system("ifconfig")
     repeatDiag()
-    
+
     
 ##getTasks
 def getTasks():
@@ -78,41 +91,88 @@ def getTasks():
         repeatDiag()
     if userInput == 2:
         print()
-        repeatDiag()
-    
+        diagMenu()
 
 ##getServices
 def getServices():
+        print("")
         print("[ 1 ]  Fedora/CentOS")
         print("[ 2 ]  Ubuntu/Debian")
+        print("[ 3 ]  Return to Diagnostic Menu")
+        print("")
+        print("If you don't know your OS select option 3 and go back to the Diagnostic Menu. Once there select System Info and figure out your OS.")
+        print("")
         userInput = input("Choose an OS: ")
-        while not validInput2(userInput):
-            userInput = input("Please enter a valid input. [ 1-2 ] ")
+        while not validInput3(userInput):
+            userInput = input("Please enter a valid input. [ 1-3 ] ")
         userInput = int(userInput)
         ##Fedora/CentOS service check
         if userInput == 1:
             print()
             os.system("systemctl list-unit-files")
+            print("")
             repeatDiag()
         ##Ubuntu/Debian Service Check
         if userInput == 2:
             print()
             os.system("service --status-all")
+            print("")
             repeatDiag()
-
+        ##IDK my OS return to Diagnostic Menu
+        if userInput == 3:
+            print()
+            diagMenu()
 
 ##Get About
 def getAbout():
     print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
     mainFunction()
+
 ##getAccounts
 def getAccounts():
-    os.system("cat /etc/passwd")
+    print("")
+    print("User accounts can be made for use by a human or service/system function in Linux. Select an Option below to view these accounts.")
+    print("To find out more about managing user accounts in Linux visit: www.tldp.org/LDP/sag/html/managing-users.html")
+    print("")
+    print("[ 1 ]  All Accounts")
+    print("[ 2 ]  Exclude System/Service Accounts")
+    print("[ 3 ]  Return to Diagnostic Menu")
+    print("")
+    userInput = input("Choose an option: ")
+    while not validInput3(userInput):
+        userInput = input("Please enter a valid input. [ 1-3 ] ")
+    userInput = int(userInput)
+    ##Displays all user accounts
+    if userInput == 1:
+        start = "\033[1m"
+        end = "\033[0;0m"
+        print("")
+        print(start + "###### User Accounts ######" + end)
+        print("")
+        os.system("cat /etc/passwd")
+        print("")
+    ##Displays user accounts without nologin or false
+    if userInput == 2:
+        start = "\033[1m"
+        end = "\033[0;0m"
+        print("")
+        print(start + "###### User Accounts ######" + end)
+        print("")
+        os.system("cat /etc/passwd | grep -v 'nologin' | grep -v 'false' ")
+        print("")
+    ##I changed my mind, return to the diagnostic menu
+    if userInput == 3:
+        print()
+        diagMenu()
     repeatDiag()
+
 ##getConn
 def getConnections():
+    print("")
     os.system("netstat -tulpn")
+    print("")
     repeatDiag()
+
 ############################ Hardening Functions ########################################
 def changePass():
     print("[ 1 ]  Change this accounts password")
@@ -249,39 +309,51 @@ def diagMenu():
     userInput = int(userInput)
     ##Call Sys Info
     if userInput == 1:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("##### System Info ######")
+        print(start + "##### System Info ######" + end)
         sysInfo()
         print()
     ##Call Scheduled Tasks
     if userInput == 2:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("#### Scheduled Tasks ######")
+        print(start + "#### Scheduled Tasks ######" + end)
         getTasks()
     ##Call Services   
     if userInput == 3:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Enabled/Running Services ######")
+        print(start + "###### Enabled/Running Services ######" + end)
         getServices()
     ##Call Accounts  
     if userInput == 4:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### User Accounts# #####")
+        print(start + "###### User Accounts ######" + end)
         getAccounts()
     ##Call Active Connections  
     if userInput == 5:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Active Connections ######")
+        print(start + "###### Active Connections ######" + end)
         getConnections()
     ##Call Menu   
     if userInput == 6:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### We're Going Back Marty ######")
+        print(start + "###### We're Going Back Marty ######" + end)
         mainFunction()
 
     ##Exit Program
     if userInput == 7:
-          return False
+        return False
 
 def hardMenu():
     print()
