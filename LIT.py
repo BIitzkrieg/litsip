@@ -4,7 +4,7 @@
 ##Eric Evans
 ##LIT Protoype
 ##10-26-16
-hooooooooyaaaaaah
+
 ##################Imports##################
 import sys
 import os
@@ -57,6 +57,7 @@ def validInput8(string):
         return False
 ######################Diagnostic Functions############################################
 ##print sys info
+
 def sysInfo():
     start = "\033[1m"
     end = "\033[0;0m"
@@ -74,7 +75,6 @@ def sysInfo():
     os.system("ifconfig")
     repeatDiag()
 
-    
 ##getTasks
 def getTasks():
     print("\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule. It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:")
@@ -206,6 +206,7 @@ def getTools():
     print("[ 1 ]  Install ClamAV")
     print("[ 2 ]  Install Lynis")
     print("[ 3 ]  Return to Main Menu")
+    print("")
     userInput = input("Choose an option: ")
     while not validInput3(userInput):
         userInput = input("Please enter a valid input. [ 1-3 ] ")
@@ -245,7 +246,8 @@ def getTools():
 
     if userInput == 3:
         mainFunction()
-    ##function to repeat mainFunction
+
+##function to repeat mainFunction
 def repeat():
     while True:
         response = input("Would you like to return to the main menu? (y/n) ").lower()
@@ -272,7 +274,8 @@ def repeatDiag():
             return daddy 
         else:
             print("Invalid input.. ")
-
+            
+##function to repeat hardMenu
 def repeatHard():
     daddy = False
     while True:
@@ -294,8 +297,10 @@ def symbolInfo():
             
 #############Menus#########################    
 def diagMenu():
+    start = "\033[1m"
+    end = "\033[0;0m"
     print()
-    print("######## Diagnostic Menu ########")
+    print(start + "######## Diagnostic Menu ########" + end)
     print()
     print("[ 1 ]  System Info")
     print("[ 2 ]  Scheduled Tasks")
@@ -358,8 +363,10 @@ def diagMenu():
         return False
 
 def hardMenu():
+    start = "\033[1m"
+    end = "\033[0;0m"
     print()
-    print("######## Hardening Menu ########")
+    print(start + "######## Hardening Menu ########" + end)
     print()
     print("[ 1 ]  Change Account Password")
     print("[ 2 ]  Remove Scheduled Tasks")
@@ -418,8 +425,10 @@ def hardMenu():
 ##################Print Statements/Input/Main##################
 ##Main Menu
 def mainFunction():
+    start = "\033[1m"
+    end = "\033[0;0m"
     print()
-    print("######## Main Menu ########")
+    print(start + "######## Main Menu ########" + end)
     print()
     print("[ 1 ]  Diagnostic Menu")
     print("[ 2 ]  Hardening Menu")
@@ -463,7 +472,9 @@ def mainFunction():
     #print()
     
 ##Welcome Page
-print("########### Welcome to LIT! #############")
+start = "\033[1m"
+end = "\033[0;0m"
+print(start + "########### Welcome to LIT! #############" + end)
 print()
 print("Pick a function by entering the number you want and pressing ENTER.")
 running = True
