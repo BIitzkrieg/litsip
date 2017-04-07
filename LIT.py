@@ -4,7 +4,7 @@
 ##Eric Evans
 ##LIT Protoype
 ##10-26-16
-
+hooooooooyaaaaaah
 ##################Imports##################
 import sys
 import os
@@ -205,9 +205,10 @@ def changePass():
 def getTools():
     print("[ 1 ]  Install ClamAV")
     print("[ 2 ]  Install Lynis")
+    print("[ 3 ]  Return to Main Menu")
     userInput = input("Choose an option: ")
-    while not validInput2(userInput):
-        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    while not validInput3(userInput):
+        userInput = input("Please enter a valid input. [ 1-3 ] ")
     userInput = int(userInput)
     ##Change current acc pass
     if userInput == 1:
@@ -242,7 +243,8 @@ def getTools():
         if userInput == 3:
             os.system("apt-get install lynis")
 
-
+    if userInput == 3:
+        mainFunction()
     ##function to repeat mainFunction
 def repeat():
     while True:
