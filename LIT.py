@@ -191,8 +191,8 @@ def changePass():
     ##change another account
     if userInput == 2:
         print()
-        print("Type 'passwd' then the name of the account you would like to change")
-        os.system("")
+        input("Type 'passwd' then the name of the account you would like to change: ")
+
         repeatHard()
 
 ##def removeTasks():
@@ -463,16 +463,20 @@ def mainFunction():
         print("###### About ######")
         getAbout()
 
-    
-
     ##Exit Program
     if userInput == 5:
           return False
 
-    ##Starting run again statement....
-    #print()
-    #print("Starting Run Again Statement...")
-    #print()
+def onStart():
+
+    euid = os.geteuid()
+    if euid != 0:
+        print("Script not started as root. Running sudo..")
+        args = ['sudo', sys.executable] + sys.argv + [os.environ]
+        # the next line replaces the currently-running process with the sudo
+        os.execlpe('sudo', *args)
+
+    print('Running with privileges.')
     
 ##Welcome Page
 start = "\033[1m"
@@ -482,7 +486,9 @@ print()
 print("Pick a function by entering the number you want and pressing ENTER.")
 running = True
 while running == True:
-    running = mainFunction()
+
+    running = onStart(),mainFunction()
+
     
 
 #Call repeat
