@@ -191,7 +191,8 @@ def changePass():
     ##change another account
     if userInput == 2:
         print()
-        input("Type 'passwd' then the name of the account you would like to change: ")
+        var = input("Type 'passwd' then the name of the account you would like to change: ")
+        os.system(var)
 
         repeatHard()
 
