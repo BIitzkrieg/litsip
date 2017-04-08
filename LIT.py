@@ -169,6 +169,8 @@ def getAccounts():
 ##getConn
 def getConnections():
     print("")
+    print("This will show active network connections (TCP and UDP) through the command line network-utility tool netstat. \n\nTo find out more about your network connections visit: www.netstat.net")
+    print("")
     os.system("netstat -tulpn")
     print("")
     repeatDiag()
@@ -192,15 +194,16 @@ def changePass():
         print("Type 'passwd' then the name of the account you would like to change")
         os.system("")
         repeatHard()
-## def removeTasks():
 
-#def killServices():
+##def removeTasks():
 
-#def removeAcc():
+##def killServices():
 
-#def killConnections():
+##def removeAcc():
 
-#def killProc():
+##def killConnections():
+
+##def killProc():
 
 def getTools():
     print("[ 1 ]  Install ClamAV")
@@ -274,7 +277,7 @@ def repeatDiag():
             return daddy 
         else:
             print("Invalid input.. ")
-            
+
 ##function to repeat hardMenu
 def repeatHard():
     daddy = False
