@@ -178,11 +178,14 @@ def getConnections():
 
 ############################ Hardening Functions ########################################
 def changePass():
+    print("")
     print("[ 1 ]  Change this accounts password")
     print("[ 2 ]  Change another account")
+    print("[ 3 ]  Return to Hardening Menu")
+    print("")
     userInput = input("Choose an option: ")
-    while not validInput2(userInput):
-        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    while not validInput3(userInput):
+        userInput = input("Please enter a valid input. [ 1-3 ] ")
     userInput = int(userInput)
     ##Change current acc pass
     if userInput == 1:
@@ -194,6 +197,9 @@ def changePass():
         print()
         var = input("Type 'passwd' then the name of the account you would like to change: ")
         os.system(var)
+    if userInput == 3:
+        print()
+        hardMenu()
 
         repeatHard()
 
@@ -213,9 +219,13 @@ def removeAcc():
         print()
         os.system("cat /etc/passwd | grep -v 'nologin' | grep -v 'false' ")
         print()
-        accountname = str(input("Enter a user account: "))
+        accountname = str(input("Enter the user account name: "))
         if accountname.isalnum():
+            print("")
             os.system("userdel -r -f " + accountname)
+            print("")
+            print("User removed!")
+            print("")
             repeatHard()
         if not accountname.strip():
             start = "\033[1m"
@@ -413,40 +423,55 @@ def hardMenu():
     userInput = int(userInput)
     ##Call changePass
     if userInput == 1:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("##### Change Account Password ######")
+        print(start + "##### Change Account Password ######" + end)
         changePass()
         print()
     ##Call removeTasks
     if userInput == 2:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("#### Remove Scheduled Tasks ######")
+        print(start + "#### Remove Scheduled Tasks ######" + end)
         removeTasks()
     ##Call killServices
     if userInput == 3:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Kill/Disable Services ######")
+        print(start + "###### Kill/Disable Services ######" + end)
         killServices()
     ##Call removeAcc
     if userInput == 4:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Remove User Accounts ######")
+        print(start + "###### Remove User Accounts ######" + end)
         removeAcc()
     ##Call killConnections
     if userInput == 5:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Kill Active Connections ######")
+        print(start + "###### Kill Active Connections ######" + end)
         killConnections()
     ##Call killProc
     if userInput == 6:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("###### Kill Active Processes ######")
+        print(start + "###### Kill Active Processes ######" + end)
         killProc()
-
+    ##Returns to Main Menu
     if userInput == 7:
+        start = "\033[1m"
+        end = "\033[0;0m"
         print()
-        print("####### We're Going Back Marty! ######")
+        print(start + "####### We're Going Back Marty! ######" + end)
         mainFunction()
+
     ##Exit Program
     if userInput == 8:
         return False
