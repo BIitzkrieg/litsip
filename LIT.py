@@ -13,6 +13,7 @@ import subprocess
 
 ##################Functions##################
 ## Bool return for a user input integer string
+
 def validInteger(string):
     index = -1
     for char in string:
@@ -196,11 +197,36 @@ def changePass():
 
         repeatHard()
 
-##def removeTasks():
-
 ##def killServices():
 
-##def removeAcc():
+def removeAcc():
+    print()
+    print("[ 1 ]  Remove an Account")
+    print("[ 2 ]  Return to Hardening Menu")
+    print()
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    ##Remove a user account
+    if userInput == 1:
+        print()
+        os.system("cat /etc/passwd | grep -v 'nologin' | grep -v 'false' ")
+        print()
+        accountname = str(input("Enter a user account: "))
+        if accountname.isalnum():
+            os.system("userdel -r -f " + accountname)
+            repeatHard()
+        if not accountname.strip():
+            start = "\033[1m"
+            end = "\033[0;0m"
+            print()
+            print(start + "Enter a valid user!" + end)
+            removeAcc()
+    ##Return to hardening menu
+    if userInput == 2:
+        print()
+        hardMenu()
 
 ##def killConnections():
 
