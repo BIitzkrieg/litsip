@@ -8,7 +8,7 @@
 ##################Imports##################
 import sys
 import os
-#import emoji
+import emoji
 import subprocess
 
 
@@ -79,7 +79,8 @@ def sysInfo():
 
 ##getTasks
 def getTasks():
-    print("\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule. It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:")
+    print("\033[1m\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule."
+          " It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:\033[0m")
     print('"www.crontab.org"\n')
     print("[ 1 ]  Edit Crontab")
     print("[ 2 ]  Return to Diagnostic Menu\n")
@@ -102,7 +103,8 @@ def getServices():
         print("[ 2 ]  Ubuntu/Debian")
         print("[ 3 ]  Return to Diagnostic Menu")
         print("")
-        print("If you don't know your OS select option 3 and go back to the Diagnostic Menu. Once there select System Info and figure out your OS.")
+        print("\033[1mIf you don't know your OS select option 3 and go back to the Diagnostic Menu. "
+              "Once there select System Info and figure out your OS.\033[0m")
         print("")
         userInput = input("Choose an OS: ")
         while not validInput3(userInput):
@@ -127,13 +129,18 @@ def getServices():
 
 ##Get About
 def getAbout():
-    print('%-200s'%"LIT is a Student Innovation Project by Andrew Danis and Zach Evans.\nInspired by the common tasks required at the Collegiate Cyber Defense Competition, LIT is designed to provide the user with an easy to use, navigable script that will help them easily diagnose and harden their Linux based system.\nLIT is for both the security and non security minded people alike, and we hope that the user will be able to learn something along the way.")    
+    print("LIT is a Student Innovation Project by Andrew Danis and Zach Evans."
+          "Inspired by the common tasks required at the Collegiate Cyber Defense Competition, "
+          "LIT is designed to provide the user with an easy to use, navigable script that will help them "
+          "easily diagnose and harden their Linux based system. LIT is for both the security and non security "
+          "minded people alike, and we hope that the user will be able to learn something along the way.")
     mainFunction()
 
 ##getAccounts
 def getAccounts():
     print("")
-    print("User accounts can be made for use by a human or service/system function in Linux. Select an Option below to view these accounts.")
+    print("User accounts can be made for use by a human or service/system function in Linux."
+          " Select an Option below to view these accounts.")
     print("To find out more about managing user accounts in Linux visit: www.tldp.org/LDP/sag/html/managing-users.html")
     print("")
     print("[ 1 ]  All Accounts")
@@ -171,7 +178,8 @@ def getAccounts():
 ##getConn
 def getConnections():
     print("")
-    print("This will show active network connections (TCP and UDP) through the command line network-utility tool netstat. \n\nTo find out more about your network connections visit: www.netstat.net")
+    print("\033[1mThis will show active network connections (TCP and UDP) through the command line network-utility tool netstat."
+          " \n\nTo find out more about your network connections visit: www.netstat.net\033[0m")
     print("")
     os.system("netstat -tulpn")
     print("")
@@ -260,15 +268,17 @@ def removeAcc():
         print()
         accountname = str(input("Enter the user account name: "))
         if accountname.isalnum():
+            start = "\033[1m"
+            end = "\033[0m"
             print("")
             os.system("userdel -r -f " + accountname)
             print("")
-            print("User removed!")
+            print(start + "User removed!" + end)
             print("")
             repeatHard()
         if not accountname.strip():
             start = "\033[1m"
-            end = "\033[0;0m"
+            end = "\033[0m"
             print()
             print(start + "Enter a valid user!" + end)
             removeAcc()
@@ -559,7 +569,8 @@ def mainFunction():
     ##About   
     if userInput == 4:
         print()
-        print("###### About ######")
+        print("\033[1m###### About ######\033[0m")
+        print()
         getAbout()
 
     ##Exit Program
@@ -581,8 +592,26 @@ def onStart():
 start = "\033[31m"
 end = "\033[0;0m"
 print()
-#print(emoji.emojize(":fire:"))
-print()
+print(emoji.emojize(' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'
+                    ' \033[1m\033[33m:fire:\033[0;0m'))
 print(start + "#########################################" + end)
 print("\033[31m###########\033[0;0m " "\033[1m\033[37mWelcome to LIT!\033[0;0m" " \033[31m#############\033[0;0m")
 print(start + "#########################################" + end)
