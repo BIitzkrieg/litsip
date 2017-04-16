@@ -8,6 +8,7 @@
 ##################Imports##################
 import sys
 import os
+#import emoji
 import subprocess
 
 
@@ -175,6 +176,44 @@ def getConnections():
     os.system("netstat -tulpn")
     print("")
     repeatDiag()
+
+##exportFile
+def exportFile():
+    print("")
+    print("This function will save all of the Diagnostic Information to a text file in the current directory.")
+    print("")
+    print("[ 1 ] Save Diagnostic Information")
+    print("[ 2 ] Return to Diagnostic Menu")
+    print("")
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    if userInput == 1:
+        print()
+        print("\033[1m\033[33mSaving File...\033[0m")
+        print()
+        print("\033[1m\033[33mType 'cat diagnostic.txt' to read the file once you exit LIT.\033[0m")
+        print()
+        os.system("printf '\n\033[1m\033[33mFile System Info: \033[0m\n' > diagnostic.txt "
+                  "&& lsb_release -a >> diagnostic.txt "
+                  "&& printf '\n\033[1m\033[33mRAM:\033[0m\n' >> diagnostic.txt "
+                  "&& free -m >> diagnostic.txt "
+                  "&& printf '\n\033[1m\033[33mPartition Info:\033[0m\n' >> diagnostic.txt "
+                  "&& df -h >> diagnostic.txt ")
+        os.system("printf '\n\033[1m\033[33mNetwork Interface Info:\033[0m\n' >> diagnostic.txt "
+                  "&& ifconfig >> diagnostic.txt "
+                  "&& printf '\n\033[1m\033[33mCrontab:\033[0m\n' >> diagnostic.txt "
+                  "&& crontab -l >> diagnostic.txt ")
+        os.system("printf '\n\033[1m\033[33mUser Accounts:\033[0m\n' >> diagnostic.txt "
+                  "&& cat /etc/passwd >> diagnostic.txt "
+                  "&& printf '\n\033[1m\033[33mActive Network Connections:\033[0m\n' >> diagnostic.txt "
+                  "&& netstat -tulpn >> diagnostic.txt")
+        repeatDiag()
+    if userInput == 2:
+        print()
+        diagMenu()
+
 
 ############################ Hardening Functions ########################################
 def changePass():
@@ -347,12 +386,13 @@ def diagMenu():
     print("[ 3 ]  Enabled/Running Services")
     print("[ 4 ]  Display User Accounts")
     print("[ 5 ]  Display Active Connections")
-    print("[ 6 ]  Return to Main Menu")
-    print("[ 7 ]  Exit")
+    print("[ 6 ]  Export Diagnostic Information")
+    print("[ 7 ]  Return to Main Menu")
+    print("[ 8 ]  Exit")
     print()
     userInput = input("Pick a function to run: ")
-    while not validInput(userInput):
-        userInput = input("Please enter a valid input. [ 1-7 ] ")
+    while not validInput8(userInput):
+        userInput = input("Please enter a valid input. [ 1-8 ] ")
     userInput = int(userInput)
     ##Call Sys Info
     if userInput == 1:
@@ -390,8 +430,15 @@ def diagMenu():
         print()
         print(start + "###### Active Connections ######" + end)
         getConnections()
-    ##Call Menu   
+    ##Call Export Diagnostic Information
     if userInput == 6:
+        start = "\033[1m"
+        end = "\033[0;0m"
+        print()
+        print(start + "###### Export Diagnostic Information ######" + end)
+        exportFile()
+    ##Call Menu   
+    if userInput == 7:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
@@ -399,7 +446,7 @@ def diagMenu():
         mainFunction()
 
     ##Exit Program
-    if userInput == 7:
+    if userInput == 8:
         return False
 
 def hardMenu():
@@ -531,9 +578,14 @@ def onStart():
     print('Running with privileges.')
     
 ##Welcome Page
-start = "\033[1m"
+start = "\033[31m"
 end = "\033[0;0m"
-print(start + "########### Welcome to LIT! #############" + end)
+print()
+#print(emoji.emojize(":fire:"))
+print()
+print(start + "#########################################" + end)
+print("\033[31m###########\033[0;0m " "\033[1m\033[37mWelcome to LIT!\033[0;0m" " \033[31m#############\033[0;0m")
+print(start + "#########################################" + end)
 print()
 print("Pick a function by entering the number you want and pressing ENTER.")
 running = True
