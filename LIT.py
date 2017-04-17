@@ -8,7 +8,7 @@
 ##################Imports##################
 import sys
 import os
-import emoji
+import time
 import subprocess
 
 
@@ -242,15 +242,18 @@ def changePass():
     ##change another account
     if userInput == 2:
         print()
-        var = input("Type 'passwd' then the name of the account you would like to change: ")
-        os.system(var)
+        var = input("Type the name of the account you would like to change: ")
+        os.system("passwd " + var)
+        hardMenu()
     if userInput == 3:
         print()
         hardMenu()
 
         repeatHard()
 
-##def killServices():
+#def killServices():
+
+
 
 def removeAcc():
     print()
@@ -289,8 +292,20 @@ def removeAcc():
 
 ##def killConnections():
 
-##def killProc():
-
+def killProc():
+    print()
+    #'"www.crontab.org"\n'
+    print("The process manager will be spawned...Note the PID of the process you want to kill, press "'"q"'" to quit, and you will be prompted to kill that PID.")
+    time.sleep(5)
+    subprocess.call('ps aux | less', shell=True)
+    userInput = str(input("Enter the PID you wish to kill: "))
+    os.system("kill " + userInput)
+    while not validInteger(userInput):
+        userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+        os.system("kill " + userInput)
+        if userInput.strip() == 'z':
+            break
+    repeatHard()
 def getTools():
     print("[ 1 ]  Install ClamAV")
     print("[ 2 ]  Install Lynis")
@@ -378,11 +393,6 @@ def repeatHard():
             return daddy
         else:
             print("Invalid input.. ")
-
-##
-def symbolInfo():
-        print('hi')
-        
             
 #############Menus#########################    
 def diagMenu():
@@ -592,26 +602,26 @@ def onStart():
 start = "\033[31m"
 end = "\033[0;0m"
 print()
-print(emoji.emojize(' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'
-                    ' \033[1m\033[33m:fire:\033[0;0m'))
+# #print(emoji.emojize(' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'
+#                     ' \033[1m\033[33m:fire:\033[0;0m'))
 print(start + "#########################################" + end)
 print("\033[31m###########\033[0;0m " "\033[1m\033[37mWelcome to LIT!\033[0;0m" " \033[31m#############\033[0;0m")
 print(start + "#########################################" + end)
