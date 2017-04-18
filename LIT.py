@@ -13,8 +13,8 @@ import subprocess
 
 
 ##################Functions##################
-## Bool return for a user input integer string
 
+#  Bool return for a user input integer string
 def validInteger(string):
     index = -1
     for char in string:
@@ -24,9 +24,22 @@ def validInteger(string):
         elif not (char in "0123456789"):
             return False
     return True
+
+# Boold return for a user input string
+def validAlphabet(string):
+    index = -1
+    for char in string:
+        index += 1
+        if (index == 0 and char[index] == '-' and len(string) > 1):
+            continue
+        elif not (char in "abcdefghijklmnopqrstuvwxyz0123456789"):
+            return False
+    return True
+
 ##Only allows the user to test for functions 1-7
 def validInput(string):
-    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7"):
+    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5"
+        or string == "6" or string == "7"):
         return True
     else:
         return False
@@ -53,7 +66,8 @@ def validInput5(string):
 
 ##Only allows the user to test for functions 1-8 for hardeningMenu
 def validInput8(string):
-    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6" or string == "7" or string == "8"):
+    if (string == "1" or string == "2" or string == "3" or string == "4" or string == "5" or string == "6"
+        or string == "7" or string == "8"):
         return True
     else:
         return False
@@ -79,8 +93,8 @@ def sysInfo():
 
 ##getTasks
 def getTasks():
-    print("\033[1m\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule."
-          " It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:\033[0m")
+    print("\nCrontab stands for cron table and is a tool that allows for a list of commands\nto run on a regular schedule."
+          " It can be edited through a text editor to do a \nvariety of tasks.\n \nTo find out more visit:")
     print('"www.crontab.org"\n')
     print("[ 1 ]  Edit Crontab")
     print("[ 2 ]  Return to Diagnostic Menu\n")
@@ -103,8 +117,8 @@ def getServices():
         print("[ 2 ]  Ubuntu/Debian")
         print("[ 3 ]  Return to Diagnostic Menu")
         print("")
-        print("\033[1mIf you don't know your OS select option 3 and go back to the Diagnostic Menu. "
-              "Once there select System Info and figure out your OS.\033[0m")
+        print("If you don't know your OS select option 3 and go back to the Diagnostic Menu. "
+              "Once there select System Info and figure out your OS.")
         print("")
         userInput = input("Choose an OS: ")
         while not validInput3(userInput):
@@ -178,8 +192,9 @@ def getAccounts():
 ##getConn
 def getConnections():
     print("")
-    print("\033[1mThis will show active network connections (TCP and UDP) through the command line network-utility tool netstat."
-          " \n\nTo find out more about your network connections visit: www.netstat.net\033[0m")
+    print("This will show active network connections (TCP and UDP) through the command line network-utility "
+          "tool netstat."
+          " \n\nTo find out more about your network connections visit: www.netstat.net")
     print("")
     os.system("netstat -tulpn")
     print("")
@@ -251,11 +266,106 @@ def changePass():
 
         repeatHard()
 
-#def killServices():
-
+def killServices():
+    print("")
+    print("[ 1 ]  Enable/Disable Services for Fedora/CentOS")
+    print("[ 2 ]  Enable/Disable Services for Ubuntu/Debian")
+    print("[ 3 ]  Return to Diagnostic Menu")
+    print("")
+    print("If you don't know your OS select option 3 and go back to the Diagnostic Menu. "
+          "Once there select System Info and figure out your OS.")
+    print("")
+    userInput = input("Choose an Option: ")
+    while not validInput3(userInput):
+        userInput = input("Please enter a valid input. [ 1-3 ] ")
+    userInput = int(userInput)
+    ##Fedora/CentOS service check
+    if userInput == 1:
+        print()
+        time.sleep(5)
+        subprocess.call("systemctl list-unit-files", shell=True)
+        print()
+        print("Services are important to monitor because unnecessary running services "
+              "on a machine can make the system more vulnerable to an attack.")
+        print()
+        print("Would you like to enable or disable a service?")
+        print("")
+        print("[ 1 ]  Enable")
+        print("[ 2 ]  Disable")
+        print("[ 3 ]  Return to Hardening Menu")
+        print("")
+        userInput = input("Choose an Option: ")
+        while not validInput3(userInput):
+            userInput = input("Please enter a valid input. [ 1-3 ] ")
+        userInput = int(userInput)
+        if userInput == 1:
+            userInput = str(input("Enter the Service you wish to enable: "))
+            os.system("systemctl start " + userInput)
+            while not validAlphabet(userInput):
+                userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+                os.system("systemctl stop " + userInput)
+                if userInput.strip() == 'z':
+                    break
+            repeatHard()
+        if userInput == 2:
+            userInput = str(input("Enter the Service you wish to disable: "))
+            os.system("systemctl stop " + userInput)
+            while not validAlphabet(userInput):
+                userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+                os.system("systemctl stop " + userInput)
+                if userInput.strip() == 'z':
+                    break
+            repeatHard()
+        if userInput == 3:
+            repeatHard()
+    ##Ubuntu/Debian Service Check
+    if userInput == 2:
+        print()
+        time.sleep(5)
+        subprocess.call("service --status-all", shell=True)
+        print()
+        print("Services are important to monitor because unnecessary running services "
+              "on a machine can make the system more vulnerable to an attack.")
+        print()
+        print("Would you like to enable or disable a service?")
+        print("")
+        print("[ 1 ]  Enable")
+        print("[ 2 ]  Disable")
+        print("[ 3 ]  Return to Hardening Menu")
+        print("")
+        userInput = input("Choose an Option: ")
+        while not validInput3(userInput):
+            userInput = input("Please enter a valid input. [ 1-3 ] ")
+        userInput = int(userInput)
+        if userInput == 1:
+            userInput = str(input("Enter the Service you wish to enable: "))
+            os.system("service " + userInput + " start")
+            while not validAlphabet(userInput):
+                userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+                os.system("service " + userInput + " stop")
+                if userInput.strip() == 'z':
+                    break
+            repeatHard()
+        if userInput == 2:
+            userInput = str(input("Enter the Service you wish to disable: "))
+            os.system("service " + userInput + " stop")
+            while not validAlphabet(userInput):
+                userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+                os.system("service " + userInput + " stop")
+                if userInput.strip() == 'z':
+                    break
+            repeatHard()
+        if userInput == 3:
+            repeatHard()
+    ##Return to hardening menu
+    if userInput == 3:
+        print()
+        hardMenu()
 
 
 def removeAcc():
+    print()
+    print("Users on a system can be used as an attack platform and should be removed if they aren't in use.")
     print()
     print("[ 1 ]  Remove an Account")
     print("[ 2 ]  Return to Hardening Menu")
@@ -290,22 +400,72 @@ def removeAcc():
         print()
         hardMenu()
 
-##def killConnections():
+def killConnections():
+    print()
+    print("[ 1 ]  Begin Killing Specific Network Connections")
+    print("[ 2 ]  Return to Hardening Menu")
+    print()
+    print("This function will show active network connections (TCP and UDP) through "
+          "the command line network-utility tool netstat. There may undesired connections being made, selecting to kill"
+          " the connection can help eliminate a possible threat to the current system.")
+    print()
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    if userInput == 1:
+        print()
+        #'"www.crontab.org"\n'
+        print("The active connections will be presented. Note the PID of the connection you want to kill, press "'"q"'" to "
+          "quit, you will be prompted to kill that PID.")
+        print()
+        time.sleep(5)
+        subprocess.call('netstat -tulpn', shell=True)
+        print()
+        userInput = str(input("Enter the PID you wish to kill: "))
+        os.system("kill " + userInput)
+        while not validInteger(userInput):
+            userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+            os.system("kill " + userInput)
+            if userInput.strip() == 'z':
+                break
+        repeatHard()
+    if userInput == 2:
+        repeatHard()
 
 def killProc():
     print()
-    #'"www.crontab.org"\n'
-    print("The process manager will be spawned...Note the PID of the process you want to kill, press "'"q"'" to quit, and you will be prompted to kill that PID.")
-    time.sleep(5)
-    subprocess.call('ps aux | less', shell=True)
-    userInput = str(input("Enter the PID you wish to kill: "))
-    os.system("kill " + userInput)
-    while not validInteger(userInput):
-        userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+    print("[ 1 ]  Begin Killing Specific Processes")
+    print("[ 2 ]  Return to Hardening Menu")
+    print()
+    print("This function will show the actively running processes on the system and under which user they are being run"
+          ". The process id or PID will be shown and you can choose to kill a process or not. Viewing the processes "
+          "will allow you to lock down your system by deciding what you want to be running. ")
+    print()
+    userInput = input("Choose an option: ")
+    while not validInput2(userInput):
+        userInput = input("Please enter a valid input. [ 1-2 ] ")
+    userInput = int(userInput)
+    if userInput == 1:
+        print()
+        #'"www.crontab.org"\n'
+        print("The process manager will be spawned...Note the PID of the process you want to kill, press "'"q"'" to quit, "
+          "and you will be prompted to kill that PID.")
+        print()
+        time.sleep(5)
+        subprocess.call('ps aux | less', shell=True)
+        print()
+        userInput = str(input("Enter the PID you wish to kill: "))
         os.system("kill " + userInput)
-        if userInput.strip() == 'z':
-            break
-    repeatHard()
+        while not validInteger(userInput):
+            userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
+            os.system("kill " + userInput)
+            if userInput.strip() == 'z':
+                break
+        repeatHard()
+    if userInput == 2:
+        repeatHard()
+
 def getTools():
     print("[ 1 ]  Install ClamAV")
     print("[ 2 ]  Install Lynis")
@@ -476,17 +636,16 @@ def hardMenu():
     print(start + "######## Hardening Menu ########" + end)
     print()
     print("[ 1 ]  Change Account Password")
-    print("[ 2 ]  Remove Scheduled Tasks")
-    print("[ 3 ]  Kill/Disable Services")
-    print("[ 4 ]  Remove User Accounts")
-    print("[ 5 ]  Kill Active Connections")
-    print("[ 6 ]  Kill Active Processes")
-    print("[ 7 ]  Return to Main Menu")
-    print("[ 8 ]  Exit")
+    print("[ 2 ]  Enable/Disable Services")
+    print("[ 3 ]  Remove User Accounts")
+    print("[ 4 ]  Kill Active Connections")
+    print("[ 5 ]  Kill Active Processes")
+    print("[ 6 ]  Return to Main Menu")
+    print("[ 7 ]  Exit")
     print()
     userInput = input("Pick a function to run: ")
-    while not validInput8(userInput):
-        userInput = input("Please enter a valid input. [ 1-8 ] ")
+    while not validInput(userInput):
+        userInput = input("Please enter a valid input. [ 1-7 ] ")
     userInput = int(userInput)
     ##Call changePass
     if userInput == 1:
@@ -496,43 +655,36 @@ def hardMenu():
         print(start + "##### Change Account Password ######" + end)
         changePass()
         print()
-    ##Call removeTasks
-    if userInput == 2:
-        start = "\033[1m"
-        end = "\033[0;0m"
-        print()
-        print(start + "#### Remove Scheduled Tasks ######" + end)
-        removeTasks()
     ##Call killServices
-    if userInput == 3:
+    if userInput == 2:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
         print(start + "###### Kill/Disable Services ######" + end)
         killServices()
     ##Call removeAcc
-    if userInput == 4:
+    if userInput == 3:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
         print(start + "###### Remove User Accounts ######" + end)
         removeAcc()
     ##Call killConnections
-    if userInput == 5:
+    if userInput == 4:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
         print(start + "###### Kill Active Connections ######" + end)
         killConnections()
     ##Call killProc
-    if userInput == 6:
+    if userInput == 5:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
         print(start + "###### Kill Active Processes ######" + end)
         killProc()
     ##Returns to Main Menu
-    if userInput == 7:
+    if userInput == 6:
         start = "\033[1m"
         end = "\033[0;0m"
         print()
@@ -540,7 +692,7 @@ def hardMenu():
         mainFunction()
 
     ##Exit Program
-    if userInput == 8:
+    if userInput == 7:
         return False
            
 
