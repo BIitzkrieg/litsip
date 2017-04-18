@@ -10,6 +10,7 @@ import sys
 import os
 import time
 import subprocess
+import platform
 
 
 ##################Functions##################
@@ -79,16 +80,17 @@ def sysInfo():
     end = "\033[0;0m"
     print("")
     print(start + "Operating System:" + end)
-    os.system("lsb_release -a")
+    os.system("uname -a")
+    #os.system("lsb_release -a")
     print("")
     print(start + "RAM:" + end)
-    os.system("free -m")
+    os.system("free -h")
     print("")
     print(start + "Partition Info:" + end)
     os.system("df -h")
     print("")
     print(start + "Network Interface Info:" + end)
-    os.system("ifconfig")
+    os.system("ip addr")
     repeatDiag()
 
 ##getTasks
@@ -218,14 +220,14 @@ def exportFile():
         print()
         print("\033[1m\033[33mType 'cat diagnostic.txt' to read the file once you exit LIT.\033[0m")
         print()
-        os.system("printf '\n\033[1m\033[33mFile System Info: \033[0m\n' > diagnostic.txt "
-                  "&& lsb_release -a >> diagnostic.txt "
+        os.system("printf '\n\033[1m\033[33mOperating System Info: \033[0m\n' > diagnostic.txt "
+                  "&& uname -a >> diagnostic.txt "
                   "&& printf '\n\033[1m\033[33mRAM:\033[0m\n' >> diagnostic.txt "
-                  "&& free -m >> diagnostic.txt "
+                  "&& free -h >> diagnostic.txt "
                   "&& printf '\n\033[1m\033[33mPartition Info:\033[0m\n' >> diagnostic.txt "
                   "&& df -h >> diagnostic.txt ")
         os.system("printf '\n\033[1m\033[33mNetwork Interface Info:\033[0m\n' >> diagnostic.txt "
-                  "&& ifconfig >> diagnostic.txt "
+                  "&& ip addr >> diagnostic.txt "
                   "&& printf '\n\033[1m\033[33mCrontab:\033[0m\n' >> diagnostic.txt "
                   "&& crontab -l >> diagnostic.txt ")
         os.system("printf '\n\033[1m\033[33mUser Accounts:\033[0m\n' >> diagnostic.txt "
@@ -747,33 +749,17 @@ def onStart():
         args = ['sudo', sys.executable] + sys.argv + [os.environ]
         # the next line replaces the currently-running process with the sudo
         os.execlpe('sudo', *args)
-
+    print()
     print('Running with privileges.')
+    print()
+    #print("Getting dependencies...")
+    #os.system("t)
     
 ##Welcome Page
 start = "\033[31m"
 end = "\033[0;0m"
 print()
-# #print(emoji.emojize(' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'
-#                     ' \033[1m\033[33m:fire:\033[0;0m'))
+
 print(start + "#########################################" + end)
 print("\033[31m###########\033[0;0m " "\033[1m\033[37mWelcome to LIT!\033[0;0m" " \033[31m#############\033[0;0m")
 print(start + "#########################################" + end)
