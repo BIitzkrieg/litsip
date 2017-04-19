@@ -6,14 +6,14 @@ if [ "$RC" = "0" ]; then
 
 
 else
-	echo ‘Downloading Python 3.0…
-	wget https://www.python.org/ftp/python/3.0/Python-3.0.tar.xz
+	echo ‘Download Python 3.5.1…’
+	wget https://www.python.org/ftp/python/3.5.1/Python-3.5.1.tar.xz
 	echo ‘Extracting…’
-	xz -d Python-3.0.tar.xz
-	tar -xvpf Python-3.0.tar
-	cd Python-3.0/
-	echo ‘Installing Python 3.0…’
-	./configure --prefix=/usr/bin/
+	xz -d Python-3.5.1.tar.xz
+	tar -xvpf Python-3.5.1.tar
+	cd Python-3.5.1/
+	echo ‘Installing Python 3.5.1…’
+	./configure --prefix=/usr/bin
 	make
 	sudo make altinstall
 
