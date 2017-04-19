@@ -8,13 +8,13 @@ if [ "$RC" = "0" ]; then
 
 
 else
-	echo ‘Downloading Python 3.5.3…
-	wget https://www.python.org/ftp/python/3.5.3/Python-3.5.3.tar.xz
+	echo ‘Downloading Python 3.0…
+	wget https://www.python.org/ftp/python/3.0/Python-3.0.tar.xz
 	echo ‘Extracting…’
-	xz -d Python-3.5.3.tar.xz
-	tar -xvpf Python-3.5.3.tar
-	cd Python-3.5.3/
-	echo ‘Installing Python 3.5.3…’
+	xz -d Python-3.0.tar.xz
+	tar -xvpf Python-3.0.tar
+	cd Python-3.0/
+	echo ‘Installing Python 3.0…’
 	./configure --prefix=/usr/bin/
 	make
 	sudo make altinstall
