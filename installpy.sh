@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 python3 --version 
 export RC=$?
 if [ "$RC" = "0" ]; then
