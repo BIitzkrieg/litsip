@@ -15,7 +15,7 @@ else
 	tar -xvpf Python-3.5.3.tar
 	cd Python-3.5.3/
 	echo ‘Installing Python 3.5.3…’
-	./configure --prefix=/usr/bin
+	./configure --prefix=/usr/bin/
 	make
 	sudo make altinstall
 
