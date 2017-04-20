@@ -443,7 +443,7 @@ def killProc():
             hardMenu()
         elif response in ['y', 'yes']:
             userInput = str(input("Enter the PID you wish to kill: "))
-            os.system("kill " + userInput)
+            subprocess.call("kill " + userInput, shell=True)
             killPID()
         else:
             print("Invalid input.. ")
@@ -465,7 +465,7 @@ def killProc():
         subprocess.call('top -b -n 1 | less', shell=True)
         print()
         userInput = str(input("Enter the PID you wish to kill: "))
-        os.system("kill " + userInput)
+        subprocess.call("kill " + userInput, shell=True)
         killPID()
     #     while not validInteger(userInput):
     #         userInput = str(input("Enter a valid integer (Type 'z' to quit): "))
