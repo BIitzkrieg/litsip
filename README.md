@@ -1,3 +1,5 @@
+# EDIT: This program should be entirely rewritten in bash... will get around to it some day. 12-20-18
+
 # Linux Initial Triage Script
 
 Dependencies:
@@ -29,7 +31,7 @@ Run the script by typing:
 ./LIT.py or python3 LIT.py
 ```
 
-# EDIT: This script should be entirely rewritten in bash... will get around to it some day. 12-20-18
+
 
 
 
